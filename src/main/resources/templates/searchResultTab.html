@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="">
+<head>
+    <title>Результаты</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Данные по акциям ${marketName!}</h1>
+    <p><a href="/searchResultTab">Показать все акции</a></p>
+
+    <div style="display: flex; justify-content: center;">
+        <!-- Форма выбора фрейма. -->
+        <form id="frameForm" action="/searchResultTab" method="get">
+            <label >Выберите таймфрейм:</label><br>
+            <label for="frame"></label><select id="frame" name="frame">
+                <option value="D">День</option>
+                <option value="W">Неделя</option>
+                <option value="M">Месяц</option>
+            </select>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input class="btn" type="submit" value="Получить данные">
+        </form>
+
+        <!-- Форма поиска с красивыми рамками, цветами и тенями. -->
+        <form id="searchForm" action="/searchResultTab" method="get">
+            <label for="searchKey">Поиск:</label><br>
+            <input type="text" id="searchKey" name="searchKey"><br>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input class="btn" type="submit" value="Получить данные">
+        </form><br>
+
+        <form id="searchFormSector" action="/searchResultTab" method="get">
+                <label>Выберите сектор:</label><br>
+            <label>
+                <select th:field="*{СЕКТОРА}">
+                    <option value="" selected>Все секторы</option>
+                    <option th:each="sectors : ${sectors}" th:value="${sectors}" th:text="${sectors}"></option>
+                </select>
+            </label><br>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input class="btn" type="submit" value="Получить данные">
+        </form><br>
+
+
+        <!-- Форма выбора рынка с красивыми рамками, цветами и тенями. -->
+        <form id="marketForm" action="/searchResultTab" method="get">
+            <label for="market">Выберите рынок:</label><br>
+            <select id="market" name="market">
+                <option value="russia">Россия</option>
+                <option value="america">Америка</option>
+            </select>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input class="btn" type="submit" value="Получить данные">
+        </form>
+    </div><br>
+    <br><p><a href="/resultBonds" class="btn">Перейти к странице облигаций</a></p>
+
+
+    <table id="stockTable" style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(0)">Тикер</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(1)">Полное название</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(2)">Цена</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(3)">RSI  (D)</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(4)">RSI  (W)</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(5)">RSI  (M)</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(6)">Сигнал MACD</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(7)">Уровень MACD</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(8)">Изменение YTD %</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(9)">Изменение за год %</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(10)">Изменение за месяц %</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(11)">Изменение за неделю %</th>
+                <th style="border: 1px solid #808080; padding: 8px; cursor: pointer;" onclick="sortTable(12)">Сектор</th>
+                <!-- и так далее для каждого поля класса StockData -->
+            </tr>
+        </thead>
+       <tbody>
+               <tr th:each="stock : ${stocks}">
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${stock.ticker} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${stock.fullName} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${#numbers.formatDecimal(num,0,2, stock.price)} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${#numbers.formatDecimal(num,0,2, stock.indRsiD)} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${#numbers.formatDecimal(num,0,2, stock.indRsiW)} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${#numbers.formatDecimal(num,0,2, stock.indRsiM)} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${#numbers.formatDecimal(num,0,2, stock.signalMacd)} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${#numbers.formatDecimal(num,0,2, stock.urovenMacd)} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${#numbers.formatDecimal(num,0,2, stock.izmYTD)} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${#numbers.formatDecimal(num,0,2, stock.izmYear)} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${#numbers.formatDecimal(num,0,2, stock.izmMonth)} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${#numbers.formatDecimal(num,0,2, stock.izmWeek)} ?: '-'"></td>
+                   <td style="border: 1px solid #808080; padding: 8px;" th:text="${stock.sector} ?: '-'"></td>
+                   <!-- и так далее для каждого поля класса StockData -->
+               </tr>
+       </tbody>
+    </table>
+    <script>
+        let sortDirection = 1;
+        let filteredRows = [];
+
+        function sortTable(columnIndex) {
+            const table = document.getElementById('stockTable');
+            const tbody = table.querySelector('tbody');
+            let rows = filteredRows.length > 0 ? filteredRows : Array.from(tbody.querySelectorAll('tr'));
+
+            rows.sort((a, b) => {
+                const cellA = a.querySelectorAll('td')[columnIndex].textContent;
+                const cellB = b.querySelectorAll('td')[columnIndex].textContent;
+
+                if (sortDirection === 1) {
+                    return cellA.localeCompare(cellB, undefined, { numeric: true });
+                } else {
+                    return cellB.localeCompare(cellA, undefined, { numeric: true });
+                }
+            });
+
+            tbody.innerHTML = '';
+
+            // Adding sorted rows back into the table
+            rows.forEach(row => tbody.appendChild(row));
+
+            // Toggle sorting direction
+            sortDirection *= -1;
+        }
+
+        const searchForm = document.getElementById('searchForm');
+        const searchKey = document.getElementById('searchKey');
+
+        const stockTable = document.getElementById('stockTable');
+
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const searchValue = searchKey.value.toUpperCase();
+
+            // Empty filteredRows array
+            filteredRows.length = 0;
+
+            for (const row of stockTable.querySelectorAll('tr')) {
+                let text = row.textContent.toUpperCase();
+                if (text.includes(searchValue)) {
+                    filteredRows.push(row);
+                }
+            }
+
+            // Clear table body
+            const tbody = stockTable.querySelector('tbody');
+            tbody.innerHTML = '';
+
+            // Add filtered Rows to the table
+            filteredRows.forEach(row => tbody.appendChild(row));
+        });
+    </script>
+        <script>
+                // Получаем форму выбора сектора и элемент select
+                const sectorForm = document.getElementById('sectorForm');
+                const sectorSelect = document.getElementById('sector');
+                const marketSelect = document.getElementById('market');
+
+                // Добавляем слушатель событий для формы выбора сектора
+                sectorForm.addEventListener('submit', function(event) {
+                    // Предотвращаем стандартное действие формы
+                    event.preventDefault();
+
+                    // Получаем значение выбранного сектора и рынка
+                    const sectorValue = sectorSelect.value;
+                    const marketValue = marketSelect.value;
+
+                    // Отправляем AJAX-запрос
+                    fetch(`/searchResultTab?sector=${sectorValue!}&market=${marketValue!}`, {
+                        method: 'GET', // или 'POST'
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Здесь обновите таблицу данными, возвращаемыми сервером
+                        const tbody = stockTable.querySelector('tbody');
+                        tbody.innerHTML = '';  // очищаем tbody
+
+                        data.stocks.forEach(stock => {
+                            const row = document.createElement('tr');
+
+                            // Создаем ячейки для каждого свойства акции и добавляем их в строку
+                            // Например:
+                            const tickerCell = document.createElement('td');
+                            tickerCell.textContent = stock.ticker;
+                            row.appendChild(tickerCell);
+                            // ... продолжайте для каждого свойства акции
+
+                            tbody.appendChild(row);  // добавляем строку в tbody
+                        });
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+                });
+            </script>
+        </body>
+</html>

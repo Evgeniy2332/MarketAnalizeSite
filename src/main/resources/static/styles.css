@@ -1,0 +1,189 @@
+/* Общий стиль для всего сайта. */
+body {
+      background-image: url("5614852.jpg");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      /*display: flex;/* Добавляем flex-контейнер для центрирования */
+      justify-content: center; /* Горизонтальное центрирование */
+      text-align: center;
+      margin: 0; /* Убираем внешние отступы */
+      padding: 0;
+      height: 100vh; /* Заполняем всю видимую высоту */
+     }
+html {
+     min-height: 100%;
+     }
+
+/* Стиль для контейнера с информацией. */
+.info-container, .form_container, .table_container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto; /* Центрирование по горизонтали */
+    box-shadow: 0px 2px 16px rgb(0 0 0 / 10%);
+}
+
+/* Стили для ссылок */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+/* Стиль для заголовков внутри контейнера. */
+.info-container h1, .info-container h2, .info-container h3 {
+    color: #2c3e50;
+}
+
+/* Стиль для абзацев внутри контейнера. */
+.info-container p {
+    color: #777;
+    line-height: 1.6;
+}
+
+/* Стили для кнопок */
+.btn {
+    display: inline-block;
+    background: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: opacity .3s;
+    text-decoration: none;
+}
+
+.btn:hover {
+    opacity: 0.7;
+}
+
+/* Стили для таблицы. */
+table {
+    border-collapse: collapse;
+    margin: auto;
+    width: 80%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 15px;
+    color: #333;
+}
+
+th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+tr:hover {
+    background-color: #f4f4f4;
+}
+
+form {
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+    margin: 0 1.5%;
+}
+
+.input-field {
+    margin-bottom: 20px;
+}
+
+.btn {
+    margin-top: 20px;
+}
+/* Стиль для ссылок-кнопок */
+.button {
+    display: inline-block;
+    background: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 10px; /* Добавляем небольшой внешний отступ между кнопками */
+    transition: opacity .3s;
+}
+
+.button:hover {
+    opacity: 0.7;
+}
+/* Стиль для заголовка */
+header {
+    text-align: center; /* Центрирование текста */
+    padding: 20px;
+}
+h1 {
+    text-align: center; /* Центрирование текста по горизонтали */
+}
+
+p {
+    text-align: center; /* Центрирование текста по горизонтали */
+}
+
+header h1 {
+    color: #3498db; /* Цвет заголовка */
+    font-size: 36px; /* Размер шрифта заголовка */
+}
+
+/* Стиль для навигации */
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center; /* Центрирование ссылок */
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px; /* Отступ между ссылками */
+}
+
+nav ul li a {
+    color: #3498db; /* Цвет ссылок в навигации */
+    text-decoration: none;
+    font-size: 18px; /* Размер шрифта ссылок */
+}
+
+/* Стиль для верхних правых ссылок */
+.top-right-links {
+    text-align: right; /* Выравнивание текста вправо */
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.top-right-links a {
+    color: #3498db; /* Цвет ссылок */
+    text-decoration: none;
+    font-size: 18px; /* Размер шрифта ссылок */
+}
+
+/* Стиль для подвала */
+footer {
+    position; /* Размещаем текст внизу экрана */
+    text-align: center; /* Центрирование текста */
+    padding: 20px;
+    background-color: #f4f4f4; /* Цвет фона подвала */
+    width: :100%; /* fixed; /* Ши Устанавлириваем позициюна под элементав-родителя как фиксированную */
+    text-align: center; /*ала Центрирование текста */
+    padding: по вс 20px;
+    background-color: #f4f4f4; /* Цвет фона подвалаей ш */
+    width: 100%; /* Занимает всю ширину экрана */
+    bottom: 0; /* Размещаем внизу экрана */
+}
+
+footer p {
+    color: #777; /*ир Цвет текста в подвале */
+    font-size: 14px; /* Размерин шрифта текста */
+}
+</style>
